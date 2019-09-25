@@ -12,7 +12,9 @@
   }
 }
 
-.fade-in {
+.lazy-loaded-content {
   opacity: 0;
-  animation: fade-in 1s 300ms forwards;
+  animation: fade-in 1s forwards;
+  background-color: #eee;
+  border: 1px solid #fff;
 }

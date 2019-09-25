@@ -10,7 +10,7 @@ import "./styles.css";
 
 const items = [];
 
-for (let i = 0; i < 100; i += 1) {
+for (let i = 0; i < 1000; i += 1) {
   items.push(i);
 }
 
@@ -21,9 +21,9 @@ function App() {
         return (
           <li key={item}>
             <Lazy>
-              <span>
+              <div className="lazy-loaded-content">
                 <button>{item}</button>
-              </span>
+              </div>
             </Lazy>
           </li>
         );
