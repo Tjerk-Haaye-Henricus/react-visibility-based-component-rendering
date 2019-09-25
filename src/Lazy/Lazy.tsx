@@ -29,9 +29,7 @@ class Lazy extends React.Component<ILazyProperties, { visible: boolean }> {
 
   handleIntersection = entries => {
     entries.forEach(entry => {
-      let visiblePct = Math.floor(entry.intersectionRatio * 100);
-      console.log(entry.target, visiblePct);
-      if (visiblePct > 0) {
+      if (entry.intersectionRatio > 0) {
         this.setState({
           visible: true
         });
