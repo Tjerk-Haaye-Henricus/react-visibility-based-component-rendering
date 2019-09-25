@@ -22,6 +22,12 @@ function App() {
           <li key={item}>
             <Lazy>
               <div className="lazy-loaded-content">
+                <img
+                  src="https://source.unsplash.com/random"
+                  alt="random"
+                  width="300"
+                  height="300"
+                />
                 <button>{item}</button>
               </div>
             </Lazy>
