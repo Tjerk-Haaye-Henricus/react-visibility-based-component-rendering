@@ -7,10 +7,23 @@
   font-family: sans-serif;
   text-align: center;
   list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+  padding: 15px;
 }
 
 .App li {
   height: 300px;
+}
+
+.App li img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.App li:focus img {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes fade-in {
@@ -23,8 +36,5 @@
 }
 
 .lazy-loaded-content {
-  opacity: 0;
-  animation: fade-in 1s forwards;
   background-color: #eee;
-  border: 1px solid #fff;
 }

@@ -1,12 +1,13 @@
-import * as React from "react";
-import { ILazyProperties } from "./interfaces";
+import React from "react";
+import { ILazyProperties, ILazyState } from "./interfaces";
+import LazyContext from "./Context";
 
-class Lazy extends React.Component<ILazyProperties, { visible: boolean }> {
+class Lazy extends React.Component<ILazyProperties, ILazyState> {
   wrapperReference: React.RefObject<HTMLDivElement>;
   observer: any;
 
   state = {
-    visible: false
+    percentage: 0
   };
 
   constructor(props) {
@@ -14,7 +15,7 @@ class Lazy extends React.Component<ILazyProperties, { visible: boolean }> {
 
     let options = {
       root: this.props.root,
-      threshold: 1.0
+      threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     };
 
     this.wrapperReference = React.createRef();
@@ -29,15 +30,9 @@ class Lazy extends React.Component<ILazyProperties, { visible: boolean }> {
 
   handleIntersection = entries => {
     entries.forEach(entry => {
-      if (entry.intersectionRatio > 0) {
-        this.setState({
-          visible: true
-        });
-      } else {
-        this.setState({
-          visible: false
-        });
-      }
+      this.setState({
+        percentage: Math.floor(entry.intersectionRatio * 100)
+      });
     });
   };
 
@@ -45,7 +40,11 @@ class Lazy extends React.Component<ILazyProperties, { visible: boolean }> {
     const { children } = this.props;
 
     return (
-      <div ref={this.wrapperReference}>{this.state.visible && children}</div>
+      <div ref={this.wrapperReference}>
+        <LazyContext.Provider value={{ percentage: this.state.percentage }}>
+          {this.state.percentage > 0 && children}
+        </LazyContext.Provider>
+      </div>
     );
   }
 }
